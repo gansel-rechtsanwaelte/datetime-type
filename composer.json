@@ -1,0 +1,43 @@
+{
+    "name": "gansel/datetime",
+    "description": "DateTime helpers",
+    "license": "commercial",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Oliver Hoff",
+            "email": "hoff@gansel-rechtsanwaelte.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Gansel\\DateTime\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Gansel\\DateTime\\Test\\": "test/" }
+    },
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "doctrine/dbal": "^2.5",
+		"phpunit/phpunit" : "^6.0",
+        "symfony/framework-bundle": "^3.3",
+        "symfony/serializer": "^3.3"
+    },
+    "suggest": {
+        "doctrine/dbal": "Database mapping types are provided",
+        "symfony/framework-bundle": "An integration bundle is provided",
+        "symfony/serializer": "Normalizers is provided"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "platform": {
+            "php": "7.1"
+        }
+    },
+    "repositories": [
+    ],
+    "extra": {
+    }
+}
