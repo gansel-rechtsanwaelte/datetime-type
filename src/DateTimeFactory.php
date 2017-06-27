@@ -72,15 +72,15 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string $date
-     * @param \DateTimeZone|string|null  $timezone
+     * @param \DateTimeZone|string|null $timezone
      *
      * @return \DateTime
      */
     public static function createDateTime($date, $timezone = null): \DateTime
     {
-        if($date instanceof \DateTime) {
+        if ($date instanceof \DateTime) {
             $date = clone $date;
-        } elseif($date instanceof \DateTimeImmutable) {
+        } elseif ($date instanceof \DateTimeImmutable) {
             $date = self::toMutable($date);
         } else {
             $date = new \DateTime($date);
@@ -98,7 +98,7 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string|null $date
-     * @param \DateTimeZone|string  $timezone
+     * @param \DateTimeZone|string           $timezone
      *
      * @return \DateTime|null
      */
@@ -113,15 +113,15 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string $date
-     * @param \DateTimeZone|string|null  $timezone
+     * @param \DateTimeZone|string|null $timezone
      *
      * @return \DateTime
      */
     public static function createDateTimeImmutable($date, $timezone = null): \DateTimeImmutable
     {
-        if($date instanceof \DateTime) {
+        if ($date instanceof \DateTime) {
             $date = self::toImmutable($date);
-        } elseif(!$date instanceof \DateTimeImmutable) {
+        } elseif (!$date instanceof \DateTimeImmutable) {
             $date = new \DateTimeImmutable($date);
         }
 
@@ -137,7 +137,7 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string|null $date
-     * @param \DateTimeZone|string  $timezone
+     * @param \DateTimeZone|string           $timezone
      *
      * @return \DateTime|null
      */
@@ -152,13 +152,13 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string $date
-     * @param \DateTimeZone|string  $timezone
+     * @param \DateTimeZone|string      $timezone
      *
      * @return \DateTime
      */
     public static function createDateTimeOverwriteTimezone($date, $timezone = 'UTC'): \DateTime
     {
-        if(!$date instanceof \DateTimeInterface) {
+        if (!$date instanceof \DateTimeInterface) {
             $date = new \DateTime($date);
         }
 
@@ -170,7 +170,7 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string|null $date
-     * @param \DateTimeZone|string  $timezone
+     * @param \DateTimeZone|string           $timezone
      *
      * @return \DateTime|null
      */
@@ -185,13 +185,13 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string $date
-     * @param \DateTimeZone|string  $timezone
+     * @param \DateTimeZone|string      $timezone
      *
      * @return \DateTimeImmutable
      */
     public static function createDateTimeImmutableOverwriteTimezone($date, $timezone = 'UTC'): \DateTimeImmutable
     {
-        if(!$date instanceof \DateTimeInterface) {
+        if (!$date instanceof \DateTimeInterface) {
             $date = new \DateTimeImmutable($date);
         }
 
@@ -203,7 +203,7 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeInterface|string|null $date
-     * @param \DateTimeZone|string  $timezone
+     * @param \DateTimeZone|string           $timezone
      *
      * @return \DateTimeImmutable|null
      */
@@ -227,7 +227,7 @@ final class DateTimeFactory
             return $timezone;
         }
 
-        return new \DateTimeZone($timezone);;
+        return new \DateTimeZone($timezone);
     }
 
     /**

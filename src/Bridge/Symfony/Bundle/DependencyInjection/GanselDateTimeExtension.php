@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Gansel\DateTime\Bridge\Symfony\Bundle\DependencyInjection;
 
-use Gansel\DateTime\Bridge\Doctrine\DBAL\Types\UtcDateTimeImmutableType;
+use Gansel\DateTime\Bridge\Doctrine\DBAL\Types\DateTimeImmutableUtcType;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -24,8 +24,8 @@ class GanselDateTimeExtension extends Extension implements PrependExtensionInter
     public function prepend(ContainerBuilder $container)
     {
         $config = [];
-        $config['dbal']['types'][UtcDateTimeImmutableType::NAME]['class'] = UtcDateTimeImmutableType::class;
-        $config['dbal']['types'][UtcDateTimeImmutableType::NAME]['commented'] = false;
+        $config['dbal']['types'][DateTimeImmutableUtcType::NAME]['class'] = DateTimeImmutableUtcType::class;
+        $config['dbal']['types'][DateTimeImmutableUtcType::NAME]['commented'] = false;
 
         $container->prependExtensionConfig('doctrine', $config);
     }
