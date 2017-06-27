@@ -11,12 +11,12 @@ use Doctrine\DBAL\Types\DateTimeType;
 /**
  * @author Oliver Hoff <hoff@gansel-rechtsanwaelte.de>
  */
-class UtcDateTimeImmutableType extends DateTimeType
+class DateTimeImmutableUtcType extends DateTimeType
 {
     /**
      * @var string
      */
-    const NAME = 'gansel_datetime_utc_immutable';
+    const NAME = 'gansel_datetime_immutable_utc';
 
     /**
      * @var \DateTimeZone
