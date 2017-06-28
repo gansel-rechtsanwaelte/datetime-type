@@ -81,4 +81,14 @@ class DateTimeImmutableUtcType extends DateTimeType
 
         return $date;
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @see \Doctrine\DBAL\Types\Type::requiresSQLCommentHint()
+     */
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
+    }
 }
