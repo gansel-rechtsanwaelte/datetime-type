@@ -36,7 +36,7 @@ class DateTimeImmutableUtcType extends DateTimeType
     /**
      * @see \Doctrine\DBAL\Types\DateTimeType::convertToDatabaseValue()
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform)
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if ($value === null) {
             return null;
@@ -60,7 +60,7 @@ class DateTimeImmutableUtcType extends DateTimeType
     /**
      * @see \Doctrine\DBAL\Types\DateTimeType::convertToPHPValue()
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform)
+    public function convertToPHPValue($value, AbstractPlatform $platform): ?\DateTimeImmutable
     {
         if ($value === null) {
             return null;
