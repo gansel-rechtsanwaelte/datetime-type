@@ -1,14 +1,7 @@
 {
-    "name": "gansel/datetime",
-    "description": "DateTime helpers",
-    "license": "commercial",
-    "type": "project",
-    "authors": [
-        {
-            "name": "Oliver Hoff",
-            "email": "hoff@gansel-rechtsanwaelte.de"
-        }
-    ],
+    "name": "gansel-rechtsanwalte/datetime-type",
+    "description": "Doctrine Datetime Type",
+    "type": "library",
     "autoload": {
         "psr-4": { "Gansel\\DateTime\\": "src/" }
     },
@@ -35,9 +28,5 @@
         "platform": {
             "php": "7.1"
         }
-    },
-    "repositories": [
-    ],
-    "extra": {
     }
 }

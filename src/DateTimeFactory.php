@@ -6,8 +6,6 @@ namespace Gansel\DateTime;
 
 /**
  * A set of pure functions for creating various date and time related objects.
- *
- * @author Oliver Hoff <hoff@gansel-rechtsanwaelte.de>
  */
 final class DateTimeFactory
 {

@@ -8,9 +8,6 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeType;
 
-/**
- * @author Oliver Hoff <hoff@gansel-rechtsanwaelte.de>
- */
 class DateTimeImmutableUtcType extends DateTimeType
 {
     /**
