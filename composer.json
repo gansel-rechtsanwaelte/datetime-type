@@ -9,11 +9,11 @@
         "psr-4": { "Gansel\\DateTime\\Test\\": "test/" }
     },
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "doctrine/dbal": "^2.6"
     },
     "require-dev": {
-        "doctrine/dbal": "^2.5",
-		"phpunit/phpunit" : "^6.0",
+        "phpunit/phpunit" : "^6.0",
         "symfony/framework-bundle": "^3.3",
         "symfony/serializer": "^3.3"
     },
