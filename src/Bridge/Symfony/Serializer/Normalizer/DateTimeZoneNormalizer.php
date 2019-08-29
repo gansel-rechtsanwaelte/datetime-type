@@ -59,6 +59,6 @@ class DateTimeZoneNormalizer implements NormalizerInterface, DenormalizerInterfa
      */
     public function supportsDenormalization($data, $type, $format = null): bool
     {
-        return $type === \DateTimeZone::class;
+        return \DateTimeZone::class === $type;
     }
 }

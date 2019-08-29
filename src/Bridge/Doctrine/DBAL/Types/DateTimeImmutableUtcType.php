@@ -35,7 +35,7 @@ class DateTimeImmutableUtcType extends DateTimeType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 
@@ -46,8 +46,8 @@ class DateTimeImmutableUtcType extends DateTimeType
             ]);
         }
 
-        if ($value->getTimezone()->getName() !== 'UTC') {
-            self::$utc === null && self::$utc = new \DateTimeZone('UTC');
+        if ('UTC' !== $value->getTimezone()->getName()) {
+            null === self::$utc && self::$utc = new \DateTimeZone('UTC');
             $value = $value->setTimezone(self::$utc);
         }
 
@@ -59,7 +59,7 @@ class DateTimeImmutableUtcType extends DateTimeType
      */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?\DateTimeImmutable
     {
-        if ($value === null) {
+        if (null === $value) {
             return null;
         }
 

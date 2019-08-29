@@ -30,7 +30,7 @@ final class DateTimeFactory
      */
     public static function toNullableImmutable(?\DateTimeInterface $date): ?\DateTimeImmutable
     {
-        if ($date === null) {
+        if (null === $date) {
             return null;
         }
 
@@ -61,7 +61,7 @@ final class DateTimeFactory
      */
     public static function toNullableMutable(?\DateTimeInterface $date): ?\DateTime
     {
-        if ($date === null) {
+        if (null === $date) {
             return null;
         }
 
@@ -84,7 +84,7 @@ final class DateTimeFactory
             $date = new \DateTime($date);
         }
 
-        if ($timezone === null) {
+        if (null === $timezone) {
             return $date;
         }
 
@@ -102,7 +102,7 @@ final class DateTimeFactory
      */
     public static function createNullableDateTime($date, $timezone = null): ?\DateTime
     {
-        if ($date === null) {
+        if (null === $date) {
             return null;
         }
 
@@ -123,7 +123,7 @@ final class DateTimeFactory
             $date = new \DateTimeImmutable($date);
         }
 
-        if ($timezone === null) {
+        if (null === $timezone) {
             return $date;
         }
 
@@ -141,7 +141,7 @@ final class DateTimeFactory
      */
     public static function createNullableDateTimeImmutable($date, $timezone = null): ?\DateTimeImmutable
     {
-        if ($date === null) {
+        if (null === $date) {
             return null;
         }
 
@@ -174,7 +174,7 @@ final class DateTimeFactory
      */
     public static function createNullableDateTimeOverwriteTimezone($date, $timezone = 'UTC'): ?\DateTime
     {
-        if ($date === null) {
+        if (null === $date) {
             return null;
         }
 
@@ -207,7 +207,7 @@ final class DateTimeFactory
      */
     public static function createNullableDateTimeImmutableOverwriteTimezone($date, $timezone = 'UTC'): ?\DateTimeImmutable
     {
-        if ($date === null) {
+        if (null === $date) {
             return null;
         }
 
@@ -235,7 +235,7 @@ final class DateTimeFactory
      */
     public static function createNullableTimezone($timezone): ?\DateTimeZone
     {
-        if ($timezone === null) {
+        if (null === $timezone) {
             return null;
         }
 
