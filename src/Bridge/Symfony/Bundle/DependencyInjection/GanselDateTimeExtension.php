@@ -13,11 +13,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class GanselDateTimeExtension extends Extension implements PrependExtensionInterface
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @see \Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface::prepend()
-     */
     public function prepend(ContainerBuilder $container)
     {
         $config = [];
@@ -27,11 +22,6 @@ class GanselDateTimeExtension extends Extension implements PrependExtensionInter
         $container->prependExtensionConfig('doctrine', $config);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @see \Symfony\Component\DependencyInjection\Extension\ExtensionInterface::load()
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));

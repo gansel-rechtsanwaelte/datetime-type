@@ -15,33 +15,20 @@ class DateTimeZoneNormalizer implements NormalizerInterface, DenormalizerInterfa
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @param \DateTimeZone $object
-     *
-     * @see \Symfony\Component\Serializer\Normalizer\NormalizerInterface::normalize()
      */
     public function normalize($object, $format = null, array $context = []): string
     {
         return $object->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @see \Symfony\Component\Serializer\Normalizer\NormalizerInterface::supportsNormalization()
-     */
     public function supportsNormalization($data, $format = null): bool
     {
         return $data instanceof \DateTimeZone;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws UnexpectedValueException
-     *
-     * @see \Symfony\Component\Serializer\Normalizer\DenormalizerInterface::denormalize()
      */
     public function denormalize($data, $class, $format = null, array $context = []): \DateTimeZone
     {
@@ -52,11 +39,6 @@ class DateTimeZoneNormalizer implements NormalizerInterface, DenormalizerInterfa
         }
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @see \Symfony\Component\Serializer\Normalizer\DenormalizerInterface::supportsDenormalization()
-     */
     public function supportsDenormalization($data, $type, $format = null): bool
     {
         return \DateTimeZone::class === $type;

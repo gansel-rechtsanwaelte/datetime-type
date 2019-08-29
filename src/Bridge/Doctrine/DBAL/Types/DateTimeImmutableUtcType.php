@@ -13,26 +13,18 @@ class DateTimeImmutableUtcType extends DateTimeType
     /**
      * @var string
      */
-    const NAME = 'gansel_datetime_immutable_utc';
+    public const NAME = 'gansel_datetime_immutable_utc';
 
     /**
      * @var \DateTimeZone
      */
     private static $utc = null;
 
-    /**
-     * {@inheritdoc}
-     *
-     * @see \Doctrine\DBAL\Types\DateTimeType::getName()
-     */
     public function getName(): string
     {
         return self::NAME;
     }
 
-    /**
-     * @see \Doctrine\DBAL\Types\DateTimeType::convertToDatabaseValue()
-     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if (null === $value) {
@@ -54,9 +46,6 @@ class DateTimeImmutableUtcType extends DateTimeType
         return $value->format($platform->getDateTimeFormatString());
     }
 
-    /**
-     * @see \Doctrine\DBAL\Types\DateTimeType::convertToPHPValue()
-     */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?\DateTimeImmutable
     {
         if (null === $value) {
@@ -79,11 +68,6 @@ class DateTimeImmutableUtcType extends DateTimeType
         return $date;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @see \Doctrine\DBAL\Types\Type::requiresSQLCommentHint()
-     */
     public function requiresSQLCommentHint(AbstractPlatform $platform): bool
     {
         return true;
