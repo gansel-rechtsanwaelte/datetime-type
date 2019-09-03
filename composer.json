@@ -1,5 +1,5 @@
 {
-    "name": "gansel-rechtsanwalte/datetime-type",
+    "name": "gansel-rechtsanwaelte/datetime-type",
     "description": "Doctrine Datetime Type",
     "type": "library",
     "autoload": {
