@@ -17,7 +17,6 @@ class GanselDateTimeExtension extends Extension implements PrependExtensionInter
     {
         $config = [];
         $config['dbal']['types'][DateTimeImmutableUtcType::NAME]['class'] = DateTimeImmutableUtcType::class;
-        $config['dbal']['types'][DateTimeImmutableUtcType::NAME]['commented'] = false;
 
         $container->prependExtensionConfig('doctrine', $config);
     }
