@@ -2,6 +2,7 @@
     "name": "gansel-rechtsanwaelte/datetime-type",
     "description": "Doctrine Datetime Type",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": { "Gansel\\DateTime\\": "src/" }
     },
