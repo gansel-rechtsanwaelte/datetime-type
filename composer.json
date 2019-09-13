@@ -7,7 +7,7 @@
         "psr-4": { "Gansel\\DateTime\\": "src/" }
     },
     "autoload-dev": {
-        "psr-4": { "Gansel\\DateTime\\Test\\": "test/" }
+        "psr-4": { "Gansel\\DateTime\\Test\\": "tests/" }
     },
     "require": {
         "php": "^7.1",
