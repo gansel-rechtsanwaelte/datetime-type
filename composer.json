@@ -23,11 +23,7 @@
         "symfony/framework-bundle": "An integration bundle is provided",
         "symfony/serializer": "Normalizers is provided"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "config": {
-        "platform": {
-            "php": "7.1"
-        }
+        "sort-packages": true
     }
 }
