@@ -92,8 +92,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string $date
      * @param \DateTimeZone|string|null $timezone
-     *
-     * @return \DateTime
      */
     public static function createDateTimeImmutable($date, $timezone = null): \DateTimeImmutable
     {
@@ -116,8 +114,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string|null $date
      * @param \DateTimeZone|string           $timezone
-     *
-     * @return \DateTime|null
      */
     public static function createNullableDateTimeImmutable($date, $timezone = null): ?\DateTimeImmutable
     {
