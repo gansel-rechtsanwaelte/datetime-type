@@ -18,7 +18,7 @@ class DateTimeImmutableUtcType extends DateTimeType
     /**
      * @var \DateTimeZone
      */
-    private static $utc = null;
+    private static $utc;
 
     public function getName(): string
     {
@@ -32,11 +32,21 @@ class DateTimeImmutableUtcType extends DateTimeType
         }
 
         if (!$value instanceof \DateTimeImmutable) {
-            throw ConversionException::conversionFailedInvalidType($value, $this->getName(), ['null', \DateTimeImmutable::class]);
+            throw ConversionException::conversionFailedInvalidType(
+                $value,
+                $this->getName(),
+                [
+                    'null',
+                    \DateTimeImmutable::class,
+                ]
+            );
         }
 
         if ('UTC' !== $value->getTimezone()->getName()) {
-            null === self::$utc && self::$utc = new \DateTimeZone('UTC');
+            if (null === self::$utc) {
+                self::$utc = new \DateTimeZone('UTC');
+            }
+
             $value = $value->setTimezone(self::$utc);
         }
 
@@ -49,17 +59,26 @@ class DateTimeImmutableUtcType extends DateTimeType
             return null;
         }
 
-        self::$utc || self::$utc = new \DateTimeZone('UTC');
+        if (null === self::$utc) {
+            self::$utc = new \DateTimeZone('UTC');
+        }
 
         if ($value instanceof \DateTimeImmutable) {
             return $value->setTimezone(self::$utc);
         }
 
         $date = \DateTimeImmutable::createFromFormat($platform->getDateTimeFormatString(), $value, self::$utc);
-        $date || $date = date_create_immutable($value, self::$utc);
 
-        if (!$date) {
-            throw ConversionException::conversionFailedFormat($value, $this->getName(), $platform->getDateTimeFormatString());
+        if (!$date instanceof \DateTimeImmutable) {
+            $date = date_create_immutable($value, self::$utc);
+        }
+
+        if (!$date instanceof \DateTimeImmutable) {
+            throw ConversionException::conversionFailedFormat(
+                $value,
+                $this->getName(),
+                $platform->getDateTimeFormatString()
+            );
         }
 
         return $date;
