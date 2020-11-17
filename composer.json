@@ -4,10 +4,14 @@
     "type": "library",
     "license": "MIT",
     "autoload": {
-        "psr-4": { "Gansel\\DateTime\\": "src/" }
+        "psr-4": {
+            "Gansel\\DateTime\\": "src/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "Gansel\\DateTime\\Test\\": "tests/" }
+        "psr-4": {
+            "Gansel\\DateTime\\Test\\": "tests/"
+        }
     },
     "require": {
         "php": ">=7.2",
