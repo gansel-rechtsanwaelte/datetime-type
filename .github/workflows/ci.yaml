@@ -1,0 +1,144 @@
+on:
+    push:
+        branches:
+            - 'master'
+    pull_request: ~
+
+name: CI
+
+jobs:
+    composer-validate:
+        name: "Composer validate (${{ matrix.php-version }})"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - '7.2'
+
+        steps:
+            -
+                name: "Checkout code"
+                uses: "actions/checkout@v2"
+
+            -
+                name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "none"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Validate composer.json"
+                run: "composer validate --strict --no-check-lock"
+
+    php-cs-fixer:
+        name: PHP-CS-Fixer
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: PHP-CS-Fixer
+              uses: docker://oskarstark/php-cs-fixer-ga
+              with:
+                  args: --diff --dry-run
+
+    composer-normalize:
+        name: composer-normalize
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: composer-normalize
+              uses: docker://ergebnis/composer-normalize-action
+
+    phpstan:
+        needs:
+            - "composer-validate"
+
+        name: "PHPStan (${{ matrix.php-version }})"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - '7.2'
+
+        steps:
+            -
+                name: "Checkout code"
+                uses: "actions/checkout@v2"
+
+            -
+                name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Composer install"
+                uses: "ramsey/composer-install@v1"
+
+            -
+                name: "Run phpstan/phpstan"
+                run: "vendor/bin/phpstan analyse -c phpstan.neon.dist"
+
+    test:
+        name: "PHP ${{ matrix.php-version }} + ${{ matrix.dependencies }}"
+
+        runs-on: ubuntu-latest
+
+        continue-on-error: ${{ matrix.allowed-to-fail }}
+
+        strategy:
+            matrix:
+                php-version:
+                    - '7.2'
+                    - '7.3'
+                    - '7.4'
+                dependencies:
+                    - 'lowest'
+                    - 'highest'
+                allowed-to-fail: [false]
+                include:
+                    - php-version: '8.0'
+                      dependencies: 'lowest'
+                      allowed-to-fail: true
+                    - php-version: '8.0'
+                      dependencies: 'highest'
+                      allowed-to-fail: true
+
+        steps:
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: Install PHP with extensions
+              uses: shivammathur/setup-php@v2
+              with:
+                  coverage: "none"
+                  php-version: "${{ matrix.php-version }}"
+                  tools: "composer:v2"
+
+            - name: Add PHPUnit matcher
+              run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+            - name: "Composer install"
+              uses: "ramsey/composer-install@v1"
+              with:
+                  dependency-versions: "${{ matrix.dependencies }}"
+                  composer-options: "--prefer-dist"
+
+            - name: Run tests
+              run: vendor/bin/phpunit -v

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Gansel\DateTime;
 
+use Webmozart\Assert\Assert;
+
 /**
  * A set of pure functions for creating various date and time related objects.
  */
@@ -14,6 +16,8 @@ final class DateTimeFactory
         if ($date instanceof \DateTimeImmutable) {
             return $date;
         }
+
+        Assert::isInstanceOf($date, \DateTime::class);
 
         return \DateTimeImmutable::createFromMutable($date);
     }
@@ -59,15 +63,12 @@ final class DateTimeFactory
         } elseif ($date instanceof \DateTimeImmutable) {
             $date = self::toMutable($date);
         } else {
-            $date = new \DateTime($date);
-        }
+            if (null !== $timezone) {
+                $timezone = self::createTimezone($timezone);
+            }
 
-        if (null === $timezone) {
-            return $date;
+            $date = new \DateTime($date, $timezone);
         }
-
-        $timezone = self::createTimezone($timezone);
-        $date->setTimezone($timezone);
 
         return $date;
     }
@@ -88,23 +89,18 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string $date
      * @param \DateTimeZone|string|null $timezone
-     *
-     * @return \DateTime
      */
     public static function createDateTimeImmutable($date, $timezone = null): \DateTimeImmutable
     {
         if ($date instanceof \DateTime) {
             $date = self::toImmutable($date);
         } elseif (!$date instanceof \DateTimeImmutable) {
-            $date = new \DateTimeImmutable($date);
-        }
+            if (null !== $timezone) {
+                $timezone = self::createTimezone($timezone);
+            }
 
-        if (null === $timezone) {
-            return $date;
+            $date = new \DateTimeImmutable($date, $timezone);
         }
-
-        $timezone = self::createTimezone($timezone);
-        $date->setTimezone($timezone);
 
         return $date;
     }
@@ -112,8 +108,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string|null $date
      * @param \DateTimeZone|string           $timezone
-     *
-     * @return \DateTime|null
      */
     public static function createNullableDateTimeImmutable($date, $timezone = null): ?\DateTimeImmutable
     {
