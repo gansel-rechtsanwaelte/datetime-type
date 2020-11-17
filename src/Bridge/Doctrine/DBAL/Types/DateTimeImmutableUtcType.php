@@ -32,10 +32,7 @@ class DateTimeImmutableUtcType extends DateTimeType
         }
 
         if (!$value instanceof \DateTimeImmutable) {
-            throw ConversionException::conversionFailedInvalidType($value, $this->getName(), [
-                'null',
-                \DateTimeImmutable::class,
-            ]);
+            throw ConversionException::conversionFailedInvalidType($value, $this->getName(), ['null', \DateTimeImmutable::class]);
         }
 
         if ('UTC' !== $value->getTimezone()->getName()) {

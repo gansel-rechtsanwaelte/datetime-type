@@ -9,11 +9,6 @@ namespace Gansel\DateTime;
  */
 final class DateTimeFactory
 {
-    /**
-     * @param \DateTimeInterface $date
-     *
-     * @return \DateTimeImmutable
-     */
     public static function toImmutable(\DateTimeInterface $date): \DateTimeImmutable
     {
         if ($date instanceof \DateTimeImmutable) {
@@ -23,11 +18,6 @@ final class DateTimeFactory
         return \DateTimeImmutable::createFromMutable($date);
     }
 
-    /**
-     * @param \DateTimeInterface|null $date
-     *
-     * @return \DateTimeImmutable|null
-     */
     public static function toNullableImmutable(?\DateTimeInterface $date): ?\DateTimeImmutable
     {
         if (null === $date) {
@@ -37,11 +27,6 @@ final class DateTimeFactory
         return self::toImmutable($date);
     }
 
-    /**
-     * @param \DateTimeInterface $date
-     *
-     * @return \DateTime
-     */
     public static function toMutable(\DateTimeInterface $date): \DateTime
     {
         if ($date instanceof \DateTime) {
@@ -54,11 +39,6 @@ final class DateTimeFactory
         return new \DateTime($formatted, $timezone);
     }
 
-    /**
-     * @param \DateTimeInterface|null $date
-     *
-     * @return \DateTime|null
-     */
     public static function toNullableMutable(?\DateTimeInterface $date): ?\DateTime
     {
         if (null === $date) {
@@ -71,8 +51,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string $date
      * @param \DateTimeZone|string|null $timezone
-     *
-     * @return \DateTime
      */
     public static function createDateTime($date, $timezone = null): \DateTime
     {
@@ -97,8 +75,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string|null $date
      * @param \DateTimeZone|string           $timezone
-     *
-     * @return \DateTime|null
      */
     public static function createNullableDateTime($date, $timezone = null): ?\DateTime
     {
@@ -151,8 +127,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string $date
      * @param \DateTimeZone|string      $timezone
-     *
-     * @return \DateTime
      */
     public static function createDateTimeOverwriteTimezone($date, $timezone = 'UTC'): \DateTime
     {
@@ -169,8 +143,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string|null $date
      * @param \DateTimeZone|string           $timezone
-     *
-     * @return \DateTime|null
      */
     public static function createNullableDateTimeOverwriteTimezone($date, $timezone = 'UTC'): ?\DateTime
     {
@@ -184,8 +156,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string $date
      * @param \DateTimeZone|string      $timezone
-     *
-     * @return \DateTimeImmutable
      */
     public static function createDateTimeImmutableOverwriteTimezone($date, $timezone = 'UTC'): \DateTimeImmutable
     {
@@ -202,8 +172,6 @@ final class DateTimeFactory
     /**
      * @param \DateTimeInterface|string|null $date
      * @param \DateTimeZone|string           $timezone
-     *
-     * @return \DateTimeImmutable|null
      */
     public static function createNullableDateTimeImmutableOverwriteTimezone($date, $timezone = 'UTC'): ?\DateTimeImmutable
     {
@@ -216,8 +184,6 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeZone|string $timezone
-     *
-     * @return \DateTimeZone
      */
     public static function createTimezone($timezone): \DateTimeZone
     {
@@ -230,8 +196,6 @@ final class DateTimeFactory
 
     /**
      * @param \DateTimeZone|string|null $timezone
-     *
-     * @return \DateTimeZone|null
      */
     public static function createNullableTimezone($timezone): ?\DateTimeZone
     {
