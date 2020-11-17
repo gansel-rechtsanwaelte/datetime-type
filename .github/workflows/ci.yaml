@@ -7,6 +7,33 @@ on:
 name: CI
 
 jobs:
+    composer-validate:
+        name: "Composer validate (${{ matrix.php-version }})"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - '7.2'
+
+        steps:
+            -
+                name: "Checkout code"
+                uses: "actions/checkout@v2"
+
+            -
+                name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "none"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Validate composer.json"
+                run: "composer validate --strict --no-check-lock"
+
     php-cs-fixer:
         name: PHP-CS-Fixer
 
@@ -34,18 +61,41 @@ jobs:
               uses: docker://ergebnis/composer-normalize-action
 
     phpstan:
-        name: PHPStan
+        needs:
+            - "composer-validate"
 
-        runs-on: ubuntu-latest
+        name: "PHPStan (${{ matrix.php-version }})"
+
+        runs-on: "ubuntu-latest"
+
+        strategy:
+            matrix:
+                php-version:
+                    - '7.2'
 
         steps:
-            - name: "Checkout code"
-              uses: actions/checkout@v2
+            -
+                name: "Checkout code"
+                uses: "actions/checkout@v2"
 
-            - name: PHPStan
-              uses: docker://oskarstark/phpstan-ga
-              with:
-                  args: analyse src --level=5
+            -
+                name: "Install PHP"
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    coverage: "none"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
+                    php-version: "${{ matrix.php-version }}"
+                    tools: composer:v2
+
+            -
+                name: "Composer install"
+                uses: "ramsey/composer-install@v1"
+                with:
+                    composer-options: "--no-scripts"
+
+            -
+                name: "Run phpstan/phpstan"
+                run: "vendor/bin/phpstan analyse -c phpstan.neon.dist"
 
     test:
         name: "PHP ${{ matrix.php-version }} + ${{ matrix.dependencies }}"

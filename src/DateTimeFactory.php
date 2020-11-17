@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Gansel\DateTime;
 
+use Webmozart\Assert\Assert;
+
 /**
  * A set of pure functions for creating various date and time related objects.
  */
@@ -14,6 +16,8 @@ final class DateTimeFactory
         if ($date instanceof \DateTimeImmutable) {
             return $date;
         }
+
+        Assert::isInstanceOf($date, \DateTime::class);
 
         return \DateTimeImmutable::createFromMutable($date);
     }
