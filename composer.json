@@ -10,7 +10,7 @@
         "psr-4": { "Gansel\\DateTime\\Test\\": "tests/" }
     },
     "require": {
-        "php": ">=7.1",
+        "php": ">=7.2",
         "doctrine/dbal": "^2.6"
     },
     "require-dev": {
