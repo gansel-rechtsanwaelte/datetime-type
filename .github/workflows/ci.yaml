@@ -4,7 +4,10 @@ on:
             - 'master'
     pull_request: ~
 
-name: CI
+name: "CI"
+
+env:
+    REQUIRED_PHP_EXTENSIONS: "ctype, filter, hash, iconv"
 
 jobs:
     composer-validate:
@@ -28,6 +31,7 @@ jobs:
                 with:
                     coverage: "none"
                     php-version: "${{ matrix.php-version }}"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                     tools: composer:v2
 
             -
@@ -83,8 +87,8 @@ jobs:
                 uses: "shivammathur/setup-php@v2"
                 with:
                     coverage: "none"
-                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                     php-version: "${{ matrix.php-version }}"
+                    extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                     tools: composer:v2
 
             -
@@ -129,6 +133,7 @@ jobs:
               with:
                   coverage: "none"
                   php-version: "${{ matrix.php-version }}"
+                  extensions: "${{ env.REQUIRED_PHP_EXTENSIONS }}"
                   tools: "composer:v2"
 
             - name: Add PHPUnit matcher
