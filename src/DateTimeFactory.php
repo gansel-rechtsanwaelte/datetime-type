@@ -63,15 +63,12 @@ final class DateTimeFactory
         } elseif ($date instanceof \DateTimeImmutable) {
             $date = self::toMutable($date);
         } else {
-            $date = new \DateTime($date);
-        }
+            if (null !== $timezone) {
+                $timezone = self::createTimezone($timezone);
+            }
 
-        if (null === $timezone) {
-            return $date;
+            $date = new \DateTime($date, $timezone);
         }
-
-        $timezone = self::createTimezone($timezone);
-        $date->setTimezone($timezone);
 
         return $date;
     }
@@ -98,15 +95,12 @@ final class DateTimeFactory
         if ($date instanceof \DateTime) {
             $date = self::toImmutable($date);
         } elseif (!$date instanceof \DateTimeImmutable) {
-            $date = new \DateTimeImmutable($date);
-        }
+            if (null !== $timezone) {
+                $timezone = self::createTimezone($timezone);
+            }
 
-        if (null === $timezone) {
-            return $date;
+            $date = new \DateTimeImmutable($date, $timezone);
         }
-
-        $timezone = self::createTimezone($timezone);
-        $date->setTimezone($timezone);
 
         return $date;
     }
