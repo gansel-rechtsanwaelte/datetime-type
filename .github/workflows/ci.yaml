@@ -43,14 +43,35 @@ jobs:
 
         runs-on: ubuntu-latest
 
-        steps:
-            - name: "Checkout code"
-              uses: actions/checkout@v2
+        strategy:
+            matrix:
+                php-version:
+                    - 7.4
 
-            - name: PHP-CS-Fixer
-              uses: docker://oskarstark/php-cs-fixer-ga
-              with:
-                  args: --diff --dry-run
+                dependencies:
+                    - highest
+
+        steps:
+            -
+                name: Checkout code
+                uses: actions/checkout@v2
+
+            -
+                name: Install PHP with extensions
+                uses: shivammathur/setup-php@2.8.0
+                with:
+                    coverage: none
+                    php-version: ${{ matrix.php-version }}
+
+            -
+                name: Composer install
+                run: composer install --no-interaction --no-progress --working-dir=tools
+
+            -
+                name: PHP-CS-Fixer
+                uses: docker://oskarstark/php-cs-fixer-ga:2.16.7
+                with:
+                    args: --diff --dry-run --verbose
 
     composer-normalize:
         name: composer-normalize

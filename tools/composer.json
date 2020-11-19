@@ -1,0 +1,8 @@
+{
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "gansel-rechtsanwaelte/php-cs-fixer-config": "^1.1.0"
+    }
+}

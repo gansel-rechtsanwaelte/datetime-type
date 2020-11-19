@@ -1,47 +1,17 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
-    ->in(__DIR__.'/src')
-    ->in(__DIR__.'/tests')
-;
+declare(strict_types=1);
 
-return PhpCsFixer\Config::create()
-    ->setRiskyAllowed(true)
-    ->setRules([
-        '@Symfony' => true,
-        '@Symfony:risky' => true,
-        'array_syntax' => [
-            'syntax' => 'short',
-        ],
-        'binary_operator_spaces' => [
-            'align_double_arrow' => true,
-        ],
-        'braces' => [
-            'allow_single_line_closure' => true,
-        ],
-        'modernize_types_casting' => true,
-        'no_extra_consecutive_blank_lines' => [
-            'break',
-            'continue',
-            'curly_brace_block',
-            'extra',
-            'parenthesis_brace_block',
-            'return',
-            'square_brace_block',
-            'throw',
-            'use',
-        ],
-        'no_unreachable_default_argument_value' => true,
-        'no_useless_else' => true,
-        'no_useless_return' => true,
-        'ordered_imports' => true,
-        'phpdoc_order' => true,
-        'psr4' => true,
-        'semicolon_after_instruction' => true,
-        'single_line_throw' => false,
-        'strict_comparison' => true,
-        'strict_param' => true,
-//         'ternary_to_null_coalescing' => true,
-    ])
-    ->setFinder($finder)
-;
+use Gansel\PhpCsFixer;
+
+require_once __DIR__ . '/tools/vendor/autoload.php';
+
+$config = PhpCsFixer\Config\Factory::fromRuleSet(new PhpCsFixer\Config\RuleSet\Php72(''), [
+    'void_return' => false,
+]);
+
+$config->getFinder()
+    ->in('src')
+    ->in('tests');
+
+return $config;
