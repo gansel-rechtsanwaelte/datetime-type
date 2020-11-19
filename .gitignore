@@ -1,3 +1,4 @@
+/tools/vendor/
 /vendor/
 .php_cs.cache
 composer.lock
