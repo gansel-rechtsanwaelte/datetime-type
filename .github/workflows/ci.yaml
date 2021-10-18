@@ -23,7 +23,7 @@ jobs:
         steps:
             -
                 name: "Checkout code"
-                uses: "actions/checkout@v2.3.4"
+                uses: "actions/checkout@v2.3.5"
 
             -
                 name: "Install PHP"
@@ -54,7 +54,7 @@ jobs:
         steps:
             -
                 name: Checkout code
-                uses: actions/checkout@v2.3.4
+                uses: actions/checkout@v2.3.5
 
             -
                 name: Install PHP with extensions
@@ -80,7 +80,7 @@ jobs:
 
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2.3.4
+              uses: actions/checkout@v2.3.5
 
             - name: composer-normalize
               uses: docker://ergebnis/composer-normalize-action
@@ -101,7 +101,7 @@ jobs:
         steps:
             -
                 name: "Checkout code"
-                uses: "actions/checkout@v2.3.4"
+                uses: "actions/checkout@v2.3.5"
 
             -
                 name: "Install PHP"
@@ -147,7 +147,7 @@ jobs:
 
         steps:
             - name: "Checkout code"
-              uses: actions/checkout@v2.3.4
+              uses: actions/checkout@v2.3.5
 
             - name: Install PHP with extensions
               uses: shivammathur/setup-php@2.15.0
